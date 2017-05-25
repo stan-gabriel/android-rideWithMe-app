@@ -27,9 +27,9 @@ var rideSchema = mongoose.Schema({
 
 var Ride = module.exports = mongoose.model('Ride', rideSchema);
 
-// Get Rides
-module.exports.getAllRides = function (callback, limit) {
-    Ride.find(callback).limit(limit)
+// Get all Rides
+module.exports.getAllRides = function (callback) {
+    Ride.find(callback)
 };
 
 // Get Ride by id

@@ -3,8 +3,10 @@
  */
 var express = require('express');
 var app = express();
-var boddyParser = require('body-parser');
-var mongoose =  require('mongoose');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+app.use(bodyParser.json());
 
 var Ride = require('./models/ride');
 var User = require('./models/user');
@@ -12,37 +14,52 @@ var User = require('./models/user');
 //connect to mongoose
 mongoose.connect('mongodb://localhost/rideWithMe');
 var db = mongoose.connection;
-    
+
 app.get('/', function (req, res) {
     res.send('Please use /api/... !');
 });
 
-app.get('/api/v1/rides', function (req, res) {
+app.get('/api/v1/ride', function (req, res) {
     Ride.getAllRides(function (err, rides) {
-        if(err) {
+        if (err) {
             throw err;
         }
         res.json(rides);
     })
 });
 
-app.get('/api/v1/rides/:destination', function (req, res) {
+app.get('/api/v1/ride/:destination', function (req, res) {
     Ride.getRideByDestination(req.params.destination, function (err, ride) {
-        if(err) {
+        if (err) {
             throw err;
         }
         res.json(ride);
     })
 });
 
-app.get('/api/v1/users', function (req, res) {
-    User.getAllRides(function (err, rides) {
-        if(err) {
+app.get('/api/v1/user', function (req, res) {
+    User.getAllUsers(function (err, users) {
+        if (err) {
             throw err;
         }
-        res.json(rides);
+        res.json(users);
     })
 });
+
+app.post('/api/v1/user', function (req, res) {
+    User.createUser({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        }
+        , function (err, user) {
+            if (err) {
+                throw err;
+            }
+            res.json(user);
+        })
+});
+
 
 app.listen(3000);
 console.log('Server is running on port 3000');

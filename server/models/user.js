@@ -27,7 +27,6 @@ var userSchema = mongoose.Schema({
     age: {
         type: Number
     }
-
 });
 
 var User = module.exports = mongoose.model('User', userSchema);
@@ -35,4 +34,9 @@ var User = module.exports = mongoose.model('User', userSchema);
 // Get Rides
 module.exports.getAllUsers = function (callback, limit) {
     User.find(callback).limit(limit)
+};
+
+// Create User
+module.exports.createUser = function (user, callback) {
+    User.create(user, callback)
 };
