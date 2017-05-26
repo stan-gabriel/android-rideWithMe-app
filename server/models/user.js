@@ -31,9 +31,14 @@ var userSchema = mongoose.Schema({
 
 var User = module.exports = mongoose.model('User', userSchema);
 
-// Get Rides
+// Get Users
 module.exports.getAllUsers = function (callback, limit) {
     User.find(callback).limit(limit)
+};
+
+// Get User by email
+module.exports.getUserByEmail = function (email, callback) {
+    User.findOne({email: {$regex: new RegExp('^'+ email + '$', "i")}}, callback)
 };
 
 // Create User

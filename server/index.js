@@ -16,9 +16,11 @@ mongoose.connect('mongodb://localhost/rideWithMe');
 var db = mongoose.connection;
 
 app.get('/', function (req, res) {
-    res.send('Please use /api/... !');
+    res.send('Please use --> /api/v1/... !');
 });
 
+
+//====================  Rides  ====================
 app.get('/api/v1/ride', function (req, res) {
     Ride.getAllRides(function (err, rides) {
         if (err) {
@@ -37,12 +39,37 @@ app.get('/api/v1/ride/:destination', function (req, res) {
     })
 });
 
+app.post('/api/v1/ride', function (req, res) {
+    Ride.createRide({
+        from: req.body.from,
+        to: req.body.to,
+        date: req.body.date
+    }, function (err, ride) {
+        if (err) {
+            throw err;
+        }
+        res.json(ride);
+    })
+});
+
+
+
+//====================  Users  ====================
 app.get('/api/v1/user', function (req, res) {
     User.getAllUsers(function (err, users) {
         if (err) {
             throw err;
         }
         res.json(users);
+    })
+});
+
+app.get('/api/v1/user/:email', function (req, res) {
+    User.getUserByEmail(req.params.email, function (err, user) {
+        if (err) {
+            throw err;
+        }
+        res.json(user);
     })
 });
 

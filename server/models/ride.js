@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 // Ride Schema
 var rideSchema = mongoose.Schema({
-    form: {
+    from: {
         type: String,
         required: true,
         lowercase: true
@@ -15,13 +15,13 @@ var rideSchema = mongoose.Schema({
         required: true,
         lowercase: true
     },
-    create_date: {
+    created_date: {
         type: Date,
         default: Date.now()
     },
     date: {
         type: Date,
-        required: true
+        // required: true
     }
 });
 
@@ -35,4 +35,9 @@ module.exports.getAllRides = function (callback) {
 // Get Ride by id
 module.exports.getRideByDestination = function (destination ,callback) {
     Ride.findOne({to: {$regex: new RegExp('^'+ destination + '$', "i")}}, callback)
+};
+
+// Create Ride
+module.exports.createRide = function (ride, callback) {
+    Ride.create(ride, callback)  
 };
