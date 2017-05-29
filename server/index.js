@@ -12,7 +12,8 @@ var Ride = require('./models/ride');
 var User = require('./models/user');
 
 //connect to mongoose
-mongoose.connect('mongodb://localhost/rideWithMe');
+// mongoose.connect('mongodb://localhost/rideWithMe');
+mongoose.connect('mongodb://admin:123admin@ds151661.mlab.com:51661/ride-with-me');
 var db = mongoose.connection;
 
 app.get('/', function (req, res) {
@@ -27,6 +28,7 @@ app.get('/api/v1/ride', function (req, res) {
             throw err;
         }
         res.json(rides);
+        console.log(rides);
     })
 });
 
@@ -36,6 +38,7 @@ app.get('/api/v1/ride/:destination', function (req, res) {
             throw err;
         }
         res.json(ride);
+        console.log(ride);
     })
 });
 
@@ -49,6 +52,7 @@ app.post('/api/v1/ride', function (req, res) {
             throw err;
         }
         res.json(ride);
+        console.log(ride);
     })
 });
 
@@ -61,6 +65,7 @@ app.get('/api/v1/user', function (req, res) {
             throw err;
         }
         res.json(users);
+        console.log(users);
     })
 });
 
@@ -70,10 +75,13 @@ app.get('/api/v1/user/:email', function (req, res) {
             throw err;
         }
         res.json(user);
+        console.log(user);
     })
 });
 
 app.post('/api/v1/user', function (req, res) {
+    console.log('================   REQ    ======================');
+    console.log(req.body);
     User.createUser({
             name: req.body.name,
             email: req.body.email,
@@ -84,6 +92,7 @@ app.post('/api/v1/user', function (req, res) {
                 throw err;
             }
             res.json(user);
+            console.log(user);
         })
 });
 

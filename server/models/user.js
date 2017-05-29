@@ -43,5 +43,7 @@ module.exports.getUserByEmail = function (email, callback) {
 
 // Create User
 module.exports.createUser = function (user, callback) {
+    console.log('======================================');
+    console.log(user);
     User.create(user, callback)
 };
