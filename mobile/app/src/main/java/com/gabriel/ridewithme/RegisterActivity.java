@@ -32,7 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String name = etFirstName.getText().toString() + etLastName.getText().toString();
+                final String firstName = etFirstName.getText().toString();
+                final String lastName = etLastName.getText().toString();
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
@@ -41,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
+//                            boolean success = jsonResponse.getBoolean("success");
+                            if (jsonResponse != null) {
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 RegisterActivity.this.startActivity(intent);
                             } else {
@@ -54,12 +55,18 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setMessage("Register Failed")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
                         }
                     }
                 };
                 RegisterRequest registerRequest = null;
                 try {
-                    registerRequest = new RegisterRequest(name, email, password, responseListener);
+                    registerRequest = new RegisterRequest(firstName, lastName, email, password, responseListener);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

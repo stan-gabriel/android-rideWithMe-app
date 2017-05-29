@@ -78,12 +78,24 @@ app.get('/api/v1/user/:email', function (req, res) {
         console.log(user);
     })
 });
+app.post('/api/v1/user/login', function (req, res) {
+    console.log('================   REQ Login   ======================');
+    console.log(req.body);
+    User.login(req.body.email, req.body.password, function (err, user) {
+            if (err) {
+                throw err;
+            }
+            res.json(user);
+            console.log(user);
+        })
+});
 
 app.post('/api/v1/user', function (req, res) {
-    console.log('================   REQ    ======================');
+    console.log('================   REQ register   ======================');
     console.log(req.body);
     User.createUser({
-            name: req.body.name,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password
         }
@@ -91,8 +103,10 @@ app.post('/api/v1/user', function (req, res) {
             if (err) {
                 throw err;
             }
-            res.json(user);
-            console.log(user);
+            if(user){
+                res.json(user);
+                console.log(user);
+            }
         })
 });
 

@@ -5,7 +5,10 @@ var mongoose = require('mongoose');
 
 // Rides Schema
 var userSchema = mongoose.Schema({
-    name: {
+    firstName: {
+        type: String
+    },
+    lastName: {
         type: String
     },
     email: {
@@ -43,7 +46,13 @@ module.exports.getUserByEmail = function (email, callback) {
 
 // Create User
 module.exports.createUser = function (user, callback) {
-    console.log('======================================');
-    console.log(user);
     User.create(user, callback)
+};
+
+// Login
+module.exports.login = function (email, password, callback) {
+    console.log('================= BACK END =====================');
+    console.log(email);
+    console.log(password);
+    User.findOne({email: {$regex: new RegExp('^'+ email + '$', "i")}, password: password}, callback)
 };
