@@ -1,6 +1,3 @@
-/**
- * Created by Gabriel on 25.05.2017.
- */
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -16,12 +13,15 @@ var User = require('./models/user');
 mongoose.connect('mongodb://admin:123admin@ds151661.mlab.com:51661/ride-with-me');
 var db = mongoose.connection;
 
+
+//------------------- API -----------------------
+// API for root path
 app.get('/', function (req, res) {
     res.send('Please use --> /api/v1/... !');
 });
 
-
-//====================  Rides  ====================
+//-----------------  Rides  ---------------------
+// API to get all Rides
 app.get('/api/v1/ride', function (req, res) {
     Ride.getAllRides(function (err, rides) {
         if (err) {
@@ -31,7 +31,7 @@ app.get('/api/v1/ride', function (req, res) {
         console.log(rides);
     })
 });
-
+// API to get a rides by destination
 app.get('/api/v1/ride/:destination', function (req, res) {
     Ride.getRideByDestination(req.params.destination, function (err, ride) {
         if (err) {
@@ -41,7 +41,7 @@ app.get('/api/v1/ride/:destination', function (req, res) {
         console.log(ride);
     })
 });
-
+// API to create a Ride
 app.post('/api/v1/ride', function (req, res) {
     Ride.createRide({
         from: req.body.from,
@@ -57,8 +57,8 @@ app.post('/api/v1/ride', function (req, res) {
 });
 
 
-
-//====================  Users  ====================
+//-----------------  Users  ---------------------
+// API to get all users
 app.get('/api/v1/user', function (req, res) {
     User.getAllUsers(function (err, users) {
         if (err) {
@@ -69,6 +69,7 @@ app.get('/api/v1/user', function (req, res) {
     })
 });
 
+// API to get an User by email
 app.get('/api/v1/user/:email', function (req, res) {
     User.getUserByEmail(req.params.email, function (err, user) {
         if (err) {
@@ -78,8 +79,9 @@ app.get('/api/v1/user/:email', function (req, res) {
         console.log(user);
     })
 });
+
+// API for User login
 app.post('/api/v1/user/login', function (req, res) {
-    console.log('================   REQ Login   ======================');
     console.log(req.body);
     User.login(req.body.email, req.body.password, function (err, user) {
             if (err) {
@@ -90,8 +92,8 @@ app.post('/api/v1/user/login', function (req, res) {
         })
 });
 
+// API to create an User
 app.post('/api/v1/user', function (req, res) {
-    console.log('================   REQ register   ======================');
     console.log(req.body);
     User.createUser({
             firstName: req.body.firstName,
@@ -110,6 +112,6 @@ app.post('/api/v1/user', function (req, res) {
         })
 });
 
-
+//---------- Server session start ----------
 app.listen(3000);
 console.log('Server is running on port 3000');

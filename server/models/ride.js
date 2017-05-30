@@ -32,7 +32,7 @@ module.exports.getAllRides = function (callback) {
     Ride.find(callback)
 };
 
-// Get Ride by id
+// Get Ride by destination
 module.exports.getRideByDestination = function (destination ,callback) {
     Ride.findOne({to: {$regex: new RegExp('^'+ destination + '$', "i")}}, callback)
 };
