@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gabriel.ridewithme.RegisterActivity">
+    tools:context="com.gabriel.ridewithme.RegisterActivity"
+    android:background="@drawable/img2">
 
     <EditText
         android:layout_width="wrap_content"
