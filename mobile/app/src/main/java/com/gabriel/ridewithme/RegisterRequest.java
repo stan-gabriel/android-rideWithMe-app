@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
 
-    private static final String REGISTER_REQUEST_URL = "http://192.168.100.2:3000/api/v1/user";
+    private static final String REGISTER_REQUEST_URL = "http://10.0.2.2:3000/api/v1/user";
     JSONObject params = new JSONObject();
 
     public RegisterRequest(String firstName, String lastName, String email, String password, Response.Listener<String> listener) throws JSONException {

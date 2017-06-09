@@ -1,6 +1,8 @@
 package com.gabriel.ridewithme;
 
+
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
@@ -10,15 +12,18 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class LoginRequest extends StringRequest {
+public class CreateRideRequest extends StringRequest {
 
-    private static final String LOGIN_REQUEST_URL = "http://10.0.2.2:3000/api/v1/user/login";
+    private static final String CREATE_RIDE_REQUEST_URL = "http://10.0.2.2:3000/api/v1/ride";
     JSONObject params = new JSONObject();
 
-    public LoginRequest(String email, String password, Response.Listener<String> listener) throws JSONException {
-        super(Method.POST, LOGIN_REQUEST_URL, listener, null);
-        params.put("email", email);
-        params.put("password", password);
+    public CreateRideRequest(String from, String to, String price, String date, String time, Response.Listener<String> listener) throws JSONException {
+        super(Request.Method.POST, CREATE_RIDE_REQUEST_URL, listener, null);
+        params.put("from", from);
+        params.put("to", to);
+        params.put("price", price);
+        params.put("date", date);
+        params.put("time", time);
     }
 
     @Override

@@ -20,43 +20,6 @@ app.get('/', function (req, res) {
     res.send('Please use --> /api/v1/... !');
 });
 
-//-----------------  Rides  ---------------------
-// API to get all Rides
-app.get('/api/v1/ride', function (req, res) {
-    Ride.getAllRides(function (err, rides) {
-        if (err) {
-            throw err;
-        }
-        res.json(rides);
-        console.log(rides);
-    })
-});
-// API to get a rides by destination
-app.get('/api/v1/ride/:destination', function (req, res) {
-    Ride.getRideByDestination(req.params.destination, function (err, ride) {
-        if (err) {
-            throw err;
-        }
-        res.json(ride);
-        console.log(ride);
-    })
-});
-// API to create a Ride
-app.post('/api/v1/ride', function (req, res) {
-    Ride.createRide({
-        from: req.body.from,
-        to: req.body.to,
-        date: req.body.date
-    }, function (err, ride) {
-        if (err) {
-            throw err;
-        }
-        res.json(ride);
-        console.log(ride);
-    })
-});
-
-
 //-----------------  Users  ---------------------
 // API to get all users
 app.get('/api/v1/user', function (req, res) {
@@ -111,6 +74,49 @@ app.post('/api/v1/user', function (req, res) {
             }
         })
 });
+
+//-----------------  Rides  ---------------------
+// API to get all Rides
+app.get('/api/v1/ride', function (req, res) {
+    Ride.getAllRides(function (err, rides) {
+        if (err) {
+            throw err;
+        }
+        res.json(rides);
+        console.log(rides);
+    })
+});
+
+// API to get a rides by destination
+app.get('/api/v1/ride/:destination', function (req, res) {
+    Ride.getRideByDestination(req.params.destination, function (err, ride) {
+        if (err) {
+            throw err;
+        }
+        res.json(ride);
+        console.log(ride);
+    })
+});
+
+// API to create a Ride
+app.post('/api/v1/ride', function (req, res) {
+    Ride.createRide({
+        from: req.body.from,
+        to: req.body.to,
+        price: req.body.price,
+        date: req.body.date,
+        time: req.body.time
+    }, function (err, ride) {
+        if (err) {
+            throw err;
+        }
+        res.json(ride);
+        console.log(ride);
+    })
+});
+
+
+
 
 //---------- Server session start ----------
 app.listen(3000);

@@ -39,11 +39,83 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-    <TimePicker
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etTo"
+        android:weightSum="12"
+        android:id="@+id/priceLinearLayout">
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/etTo"
+            android:hint="Price"
+            android:inputType="numberSigned"
+            android:layout_weight="8"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTo"
+            android:layout_weight="4"
+            android:hint="Price"
+            android:inputType="numberSigned"
+            android:text="RON"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceLinearLayout"
+        android:id="@+id/date_layout"
+        android:weightSum="12">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Select Date..."
+            android:id="@+id/selectedDate"
+            android:layout_weight="10"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:id="@+id/bSelectDate"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/date_layout"
+    android:weightSum="12"
+    android:id="@+id/linearLayout">
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/etTo"
-        android:layout_alignParentStart="true" />
+        android:hint="Select Time..."
+        android:id="@+id/selectedTime"
+        android:layout_weight="10"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:id="@+id/bSelectTime"
+        android:layout_weight="2"/>
+
+</LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/bSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Save" />
+
 
 </RelativeLayout>
