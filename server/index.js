@@ -47,12 +47,12 @@ app.get('/api/v1/user/:email', function (req, res) {
 app.post('/api/v1/user/login', function (req, res) {
     console.log(req.body);
     User.login(req.body.email, req.body.password, function (err, user) {
-            if (err) {
-                throw err;
-            }
-            res.json(user);
-            console.log(user);
-        })
+        if (err) {
+            throw err;
+        }
+        res.json(user);
+        console.log(user);
+    })
 });
 
 // API to create an User
@@ -68,7 +68,7 @@ app.post('/api/v1/user', function (req, res) {
             if (err) {
                 throw err;
             }
-            if(user){
+            if (user) {
                 res.json(user);
                 console.log(user);
             }
@@ -98,6 +98,19 @@ app.get('/api/v1/ride/:destination', function (req, res) {
     })
 });
 
+// API to get a rides by destination
+app.get('/api/v1/ride/:from/:to', function (req, res) {
+    Ride.getRidesByLocationAndDestination(req.params.from, req.params.to,
+        function (err, ride) {
+            if (err) {
+                throw err;
+            }
+            res.json(ride);
+            console.log(ride);
+        })
+});
+
+
 // API to create a Ride
 app.post('/api/v1/ride', function (req, res) {
     Ride.createRide({
@@ -114,8 +127,6 @@ app.post('/api/v1/ride', function (req, res) {
         console.log(ride);
     })
 });
-
-
 
 
 //---------- Server session start ----------

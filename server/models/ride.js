@@ -15,13 +15,18 @@ var rideSchema = mongoose.Schema({
         required: true,
         lowercase: true
     },
+    price: {
+        type: String
+    },
     created_date: {
         type: Date,
         default: Date.now()
     },
     date: {
         type: Date,
-        // required: true
+    },
+    time: {
+        type: Date
     }
 });
 
@@ -35,6 +40,11 @@ module.exports.getAllRides = function (callback) {
 // Get Ride by destination
 module.exports.getRideByDestination = function (destination ,callback) {
     Ride.findOne({to: {$regex: new RegExp('^'+ destination + '$', "i")}}, callback)
+};
+
+// Get Ride by Location & Destination
+module.exports.getRidesByLocationAndDestination = function (from, to,callback) {
+    Ride.find({from: {$regex: new RegExp('^'+ from + '$', "i")}, to: {$regex: new RegExp('^'+ to + '$', "i")}}, callback)
 };
 
 // Create Ride

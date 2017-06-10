@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Create your ride."
+        android:text="Creaza o cursa noua!"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -63,9 +63,11 @@
             android:hint="Price"
             android:inputType="numberSigned"
             android:text="RON"
-            android:textColor="@android:color/holo_blue_dark" />
-
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,14 +110,16 @@
 </LinearLayout>
 
 
-
     <Button
         android:id="@+id/bSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:text="Save" />
+        android:background="@color/colorPrimaryDark"
+        android:text="Save"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
