@@ -23,10 +23,10 @@ var rideSchema = mongoose.Schema({
         default: Date.now()
     },
     date: {
-        type: Date,
+        type: String
     },
     time: {
-        type: Date
+        type: String
     }
 });
 
