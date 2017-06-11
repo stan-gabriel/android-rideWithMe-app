@@ -1,6 +1,7 @@
 package com.gabriel.ridewithme;
 
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,25 +56,37 @@ public class FindRideActivity extends AppCompatActivity {
                 final String from = fromTxt.getText().toString();
                 final String to = toTxt.getText().toString();
 
+                if(from.length() == 0 || to.length() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FindRideActivity.this);
+                    builder.setMessage("Locul de plecare cat si destinatia sunt obligatorii!")
+                            .setNegativeButton("Incearca din nou", null)
+                            .create()
+                            .show();
+                    return;
+                }
+
                 JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, "http://10.0.2.2:3000/api/v1/ride/" + from + "/" + to, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
 
-
                                 List<String> list = new ArrayList<String>();
-                                for(int i = 0; i < response.length(); i++){
-                                    String info = null;
-                                    try {
-                                        info = "\n" + response.getJSONObject(i).getString("from") + " - " + response.getJSONObject(i).getString("to") + "\n" +
-                                                "Pret - " + response.getJSONObject(i).getString("price") + " RON" + "\n" +
-                                                "Data de plecare - " + response.getJSONObject(i).getString("date") + "\n" +
-                                                "Ora de plecare - " + response.getJSONObject(i).getString("time");
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                                if (response.length() > 0){
+                                    for(int i = 0; i < response.length(); i++){
+                                        String info = null;
+                                        try {
+                                            info = "\n" + response.getJSONObject(i).getString("from") + " - " + response.getJSONObject(i).getString("to") + "\n" +
+                                                    "Pret - " + response.getJSONObject(i).getString("price") + " RON" + "\n" +
+                                                    "Data de plecare - " + response.getJSONObject(i).getString("date") + "\n" +
+                                                    "Ora de plecare - " + response.getJSONObject(i).getString("time");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        list.add(info);
                                     }
-                                    list.add(info);
-                                }
+                                }else{
+                                    list.add("Pentru: " + from + " - "+ to +"\n" +"Nu a fost gasita nici o inregistrare...");
+                                };
 
 
                                 ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(FindRideActivity.this, android.R.layout.simple_list_item_1, list);

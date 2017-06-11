@@ -56,6 +56,16 @@ public class CreateRideActivity extends AppCompatActivity  implements View.OnCli
                 final String date = txtDate.getText().toString();
                 final String time = txtTime.getText().toString();
 
+                if (from.length() == 0 || to.length() == 0 || price.length() == 0 || date.length() == 0 || time.length() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateRideActivity.this);
+                    builder.setMessage("Toate campurile sunt obligatorii!")
+                            .setNegativeButton("Incearca din nou", null)
+                            .create()
+                            .show();
+                    return;
+                }
+
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

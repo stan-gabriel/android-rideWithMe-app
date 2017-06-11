@@ -37,6 +37,22 @@ public class RegisterActivity extends AppCompatActivity {
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
+                if(firstName.length() == 0 || lastName.length() == 0 || email.length() == 0 || password.length() == 0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("Toate campurile sunt obligatorii!")
+                            .setNegativeButton("Incearca din nou", null)
+                            .create()
+                            .show();
+                    return;
+                }else if(!isEmailValid(email)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("Adresa de email nu este valida!")
+                            .setNegativeButton("Incearca din nou", null)
+                            .create()
+                            .show();
+                    return;
+                }
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -74,5 +90,9 @@ public class RegisterActivity extends AppCompatActivity {
                 queue.add(registerRequest);
             }
         });
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

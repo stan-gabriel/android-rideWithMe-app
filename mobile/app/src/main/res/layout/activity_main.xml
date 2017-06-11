@@ -19,57 +19,53 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Name"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/tvWelcomeMsg"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etFullName"
-        android:layout_below="@+id/textView2"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/tvWelcomeMsg"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Creat a Ride"
         android:id="@+id/bCreateRide"
-        android:layout_below="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/textView"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Creat a Ride" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find a ride"
         android:id="@+id/bFindRide"
-        android:layout_below="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_below="@+id/textView3"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Find a ride"
+        android:layout_alignParentEnd="true" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Why travel alone when you can share your journey with others!"
         android:id="@+id/textView"
-        android:layout_below="@+id/etFullName"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etFullName"
+        android:text="Why travel alone when you can share your journey with others!"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Or find a ride offered by someone else..."
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
         android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:text="Or find a ride offered by someone else..."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/background_dark" />
 
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.gabriel.ridewithme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +45,24 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
+                if (email.length() > 0 && password.length() > 0) {
+                    if(!isEmailValid(email)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Adresa de email completata nu este valida!")
+                                .setNegativeButton("Incearca din nou", null)
+                                .create()
+                                .show();
+                        return;
+                    }
+                }else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Toate campurile sunt obligatorii!")
+                                .setNegativeButton("Incearca din nou", null)
+                                .create()
+                                .show();
+                    return;
+                }
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -52,17 +72,24 @@ public class LoginActivity extends AppCompatActivity {
                             if (jsonResponse != null) {
                                 String firstName = jsonResponse.getString("firstName");
                                 String lastName = jsonResponse.getString("lastName");
+                                String fullName = firstName + " " + lastName;
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("firstName", firstName);
+                                editor.putString("lastName", lastName);
+                                editor.putString("fullName", fullName);
+                                editor.apply();
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("fistName", firstName);
-                                intent.putExtra("lastName", lastName);
-
+//                                intent.putExtra("fistName", firstName);
+//                                intent.putExtra("lastName", lastName);
                                 LoginActivity.this.startActivity(intent);
 
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("Login Failed")
-                                        .setNegativeButton("Retry", null)
+                                        .setNegativeButton("Incearca din nou", null)
                                         .create()
                                         .show();
                             }
@@ -71,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Login Failed")
-                                    .setNegativeButton("Retry", null)
+                                    .setNegativeButton("Incearca din nou", null)
                                     .create()
                                     .show();
                         }
@@ -88,5 +115,9 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

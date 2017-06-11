@@ -46,13 +46,15 @@
             android:layout_weight="6"
             android:hint="To..."
             android:inputType="textPersonName" />
+
         <Button
             android:id="@+id/bSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_weight="2"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Cauta" />
 
     </LinearLayout>

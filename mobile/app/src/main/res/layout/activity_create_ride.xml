@@ -80,12 +80,15 @@
             android:hint="Select Date..."
             android:id="@+id/selectedDate"
             android:layout_weight="10"/>
+
         <Button
+            android:id="@+id/bSelectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#FFFFACAB"
             android:text="Select Date"
-            android:id="@+id/bSelectDate"
-            android:layout_weight="2"/>
+            android:textAllCaps="false" />
 
     </LinearLayout>
     <LinearLayout
@@ -100,12 +103,15 @@
         android:hint="Select Time..."
         android:id="@+id/selectedTime"
         android:layout_weight="10"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Time"
-        android:id="@+id/bSelectTime"
-        android:layout_weight="2"/>
+
+        <Button
+            android:id="@+id/bSelectTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:backgroundTint="#FFFFACAB"
+            android:text="Select Time"
+            android:textAllCaps="false" />
 
 </LinearLayout>
 
@@ -115,11 +121,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="Save"
-        android:textColor="@color/colorAccent"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Save" />
 
 
 </RelativeLayout>
